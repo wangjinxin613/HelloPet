@@ -1,0 +1,35 @@
+.list {
+    margin-top: 20px;
+
+    & .single {
+        padding: 20px 20px;
+        margin-bottom: 20px;
+        background: @background;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        & .address {
+            font-size: 14px;
+            color: @text-color-info;
+
+            & span {
+                color: @text-color-active;
+            }
+        }
+
+        & .message {
+            margin-top: 10px;
+            line-height: 160%;
+        }
+
+        & .createTime {
+            color: @text-color-info;
+            font-size: 14px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

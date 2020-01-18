@@ -1,0 +1,43 @@
+<html>
+<head>
+</head>
+<body>
+    <div id="title">Web-client for testing get account</div>
+    <div id="account"></div>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+<script type="text/javascript">
+    function loadWeb3() {
+     
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+          // set the provider you want from Web3.providers
+          web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+    }
+    function getAccount(callback) {
+        let account = web3.eth.coinbase;
+        let tag = true;
+
+        if ("null" == account || null == account) {
+            tag = false;
+        }
+
+       if(tag){
+            callback(account);
+        } else {
+            setTimeout(function(){
+                let text = "Try to get account again!";
+                document.getElementById("account").innerHTML = text;
+                getAccount(callback);
+            }, 1000);
+        }
+    }
+    loadWeb3();
+    getAccount(function(account) {
+        let text = `Account: ${account}`;
+        document.getElementById("account").innerHTML = text;
+    });
+</script>
+</body>
+</html>

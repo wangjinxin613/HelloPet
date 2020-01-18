@@ -1,0 +1,129 @@
+.balance-view {
+    margin: 40px 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .token-view {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #999;
+        border-radius: 50%;
+
+        & i {
+            font-size: 26px;
+        }
+    }
+
+    & .balance {
+        font-size: 28px;
+        margin-top: 15px;
+    }
+}
+
+.capture {
+    width: 250px;
+    height: 230px;
+    margin: 30px auto;
+    border-radius: 10px;
+    position: relative;
+    background-size: 100% 100%;
+    overflow: hidden;
+
+    & .img {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        filter: blur(4px);
+    }
+
+    & .mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(152, 160, 255, 0.8);
+        border-radius: 10px;
+    }
+
+    & .tip {
+        position: absolute;
+        top: 60px;
+        z-index: 100;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    @keyframes jump {
+        0% {
+            transform: translateX(-50%) translateY(0);
+        }
+        50% {
+            transform: translateX(-50%) translateY(-8px);
+        }
+        100% {
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
+    & .captureBtn {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: @btn-color-active;
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        animation: jump 2s;
+        animation-iteration-count: infinite;
+        animation-duration: alternate;
+
+        & i {
+            font-size: 26px;
+        }
+    }
+
+
+    @keyframes zhuan {
+        0% {
+            transform: translateX(-50%) rotateZ(0deg);
+        }
+        100% {
+            transform: translateX(-50%) rotateZ(360deg);
+        }
+    }
+
+    .captureBtnNO {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        height: 50px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & i {
+            font-size: 20px;
+            animation: zhuan 4s;
+            animation-iteration-count: infinite;
+            transform-origin: center;
+            animation-timing-function: linear;
+        }
+    }
+}

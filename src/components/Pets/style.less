@@ -1,0 +1,168 @@
+.pets {
+    margin-top: 30px;
+    padding: 0 @paddingW;
+
+    & .pet-detail {
+        width: 100%;
+        margin-bottom: 20px;
+        cursor: pointer;
+
+        & .img-view {
+            height: 100%;
+            background: @btn-color;
+            border-radius: @border-radius-default;
+            background-image: url(../../../static/imgs/pet1.jpg);
+            background-size: 100% 100%;
+            position: relative;
+            height: 225px;
+
+            & .dna {
+                background: rgba(255, 255, 255, 0.8);
+                position: absolute;
+                padding: 5px 8px;
+                font-size: 12px;
+                border-radius: 50px;
+                bottom: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                align-items: center;
+                color: @text-color;
+
+                & i {
+                    margin-right: 3px;
+                    color: @text-color-info;
+                }
+            }
+
+
+            @keyframes jump {
+                0% {
+                    transform:  translateY(-50%);
+                    opacity: 1;
+                     background: rgba(152, 160, 255, 1);
+                }
+                50% {
+                    transform: translateY(calc(-50% - 2px));
+                     background: rgba(152, 160, 255, 0.92);
+                }
+                100% {
+                    transform:  translateY(calc(-50%));
+                    opacity: 1;
+                     background: rgba(152, 160, 255, 1);
+                }
+            }
+
+
+            & .feed-view {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #fff;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: jump 1.5s;
+                animation-iteration-count: infinite;
+                animation-duration: alternate;
+                background: rgba(152, 160, 255, 0.92);
+
+                & i {
+                    font-size: 24px;
+                }
+
+                &.feed-view-cooling{
+                    background: rgba(110, 110, 110, 0.98) !important;
+                     animation: none;
+                }
+            }
+
+
+        }
+
+        & .level-view {
+            background: #fff;
+            width: 53px;
+            margin-left: 10px;
+            box-shadow: 0 2px 4px 0 #999;
+            border-radius: 2px;
+            padding: 10px 0 8px;
+
+            & .level {
+                background: @btn-color-active;
+                width: 35px;
+                height: 35px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                border-radius: 50%;
+            }
+
+            & .text {
+                font-size: 12px;
+                margin-top: 5px;
+                text-align: center;
+                color: @text-color-minor;
+            }
+        }
+
+        & .petName {
+            margin-top: 10px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+
+            & .feedCount {
+                color: @text-color-info;
+                font-size: 14px;
+            }
+        }
+
+        & .createTime {
+            margin-top: 5px;
+            font-size: 13px;
+            color: @text-color-info;
+        }
+
+
+        @keyframes zhuan {
+            0% {
+                transform:rotateZ(0deg);
+            }
+            100% {
+                transform: rotateZ(360deg);
+            }
+        }
+
+        & .feed-cooling{
+            background: rgba(255, 255,255, 0.8);
+            width: 85px;
+            padding: 8px 0;
+            font-size: 12px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            text-align: center;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & i{
+                font-size: 12px;
+                animation: zhuan 4s;
+                animation-iteration-count: infinite;
+                transform-origin: center;
+                animation-timing-function: linear;
+                display: block;
+                margin-right: 5px;
+            }
+        }
+    }
+}

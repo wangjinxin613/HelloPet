@@ -1,0 +1,45 @@
+@text-color-info: #ACB2BF; // info 字体颜色
+@text-color-minor: #999;
+@text-color: #303133; // 字体主色 黑
+@text-color-active: #409EFF; // 蓝色字体
+@btn-color:  linear-gradient(to left, #98a0ff , #74aaff); // 主色渐变
+@btn-color-active:  linear-gradient(to left, #ff64a2 , #ff8d7a); //红色渐变颜色
+@bi: 1;
+@border-defalut: 1px solid rgb(187, 187, 187); // 默认border
+@border-radius-default: 10px; // 默认border-radius
+@headerHeight: 100px; // 顶部栏高度
+@background: rgb(245, 245, 250);  // 功能区背景颜色
+@background-base: #f8f8f8; //主背景
+@paddingW: 20px; // 页面padding距离
+@color-primary: #98a0ff;
+
+.wrap{
+    width: 1050px;
+    margin: 0 auto;
+}
+
+a{
+    text-decoration: none;
+}
+
+.title {
+    padding: 10px @paddingW;
+    border-bottom: 1px solid #ccc;
+    color: @text-color-info;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.noMore{
+    text-align: center;
+    color: @text-color-info;
+    padding: 30px 0;
+}
+
+
+.el-textarea__inner{
+    height: 180PX;
+}
