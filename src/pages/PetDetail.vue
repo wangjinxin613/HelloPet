@@ -2,7 +2,7 @@
     <div v-loading="loading">
         <div class="pets wrap" v-if="!noThisPet">
             <div class="pet-detail">
-                <div class="img-view" :style="{ backgroundImage: 'url(../../../static/imgs/pet' + petType(item.dna) + '.jpg)' }">
+                <div class="img-view" :style="{ backgroundImage: 'url(/static/imgs/pet' + petType(item.dna) + '.jpg)' }">
                     <div class="level-view">
                         <div class="level">{{ item.level }}</div>
                         <div class="text">LVL</div>
@@ -57,7 +57,7 @@
                         <div>转移记录</div>
                         <div>转移总次数：{{ feeds.length }}</div>
                     </div> -->
-                    <el-table :data="transferData" style="width: 100%;margin-top: 10px;margin-bottom: 100px;" v-loading="loading">
+                    <el-table :data="transferData" style="width: 100%;margin-top: 10px;margin-bottom: 100px;" >
                         <el-table-column prop="person" label="From" width="380">
                             <template slot-scope="scope">
                                 <router-link :to="'/person/' + scope.row._from">{{ scope.row._from }}</router-link>
