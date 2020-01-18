@@ -8,7 +8,7 @@
             <el-row :gutter="20" align="middle">
                 <el-col :xs="6" :sm="6" :md="6" v-for="(item, index) in petNum" :key="index">
                     <div class="single" @click="buy(index + 1)">
-                        <img :src="'/static/imgs/pet' + (index + 1) + '.jpg'" alt="" />
+                        <img :src="'../../static/imgs/pet' + (index + 1) + '.jpg'" alt="" />
                         <div class="price-view">
                             <div class="price">{{ price }}</div>
                             <div class="level">{{ level }}级</div>
