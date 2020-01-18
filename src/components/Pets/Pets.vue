@@ -4,7 +4,7 @@
             <el-row :gutter="20" align="middle">
                 <el-col :xs="6" :sm="6" :md="6" v-for="(item, index) in data" :key="index">
                     <div class="pet-detail" @click="$router.push({ path: '/petDetail?id=' + item.id })">
-                        <div class="img-view" :style="{backgroundImage: 'url(../../static/imgs/pet' +  petType (item.dna) + '.jpg)'}">
+                        <div class="img-view" :style="{backgroundImage: 'url(../static/imgs/pet' +  petType (item.dna) + '.jpg)'}">
                             <div class="level-view">
                                 <div class="level">{{ item.level }}</div>
                                 <div class="text">LVL</div>
