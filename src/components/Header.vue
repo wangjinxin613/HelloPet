@@ -36,13 +36,13 @@
             </ul>
 
             <div class="right-view" @click="showLayer = true">
-                <div class="headImg"><img src="../../static/imgs/headImg.svg" alt="" /></div>
+                <div class="headImg"><img src="../assets/imgs/headImg.svg" alt="" /></div>
                 <div class="account">
                     <div class="nickName">{{ userInfo.name == '' ? '未设置用户名' : userInfo.name }}</div>
                     <div class="address">
                         <div>{{ address | toAddress }}</div>
                         <div class="balance">
-                            <img src="../../static/imgs/token.png" />
+                            <img src="../assets/imgs/token.png" />
                             {{ balance }}
                         </div>
                     </div>

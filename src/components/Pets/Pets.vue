@@ -4,7 +4,7 @@
             <el-row :gutter="20" align="middle">
                 <el-col :xs="6" :sm="6" :md="6" v-for="(item, index) in data" :key="index">
                     <div class="pet-detail" @click="$router.push({ path: '/petDetail?id=' + item.id })">
-                        <div class="img-view" :style="{backgroundImage: 'url(../static/imgs/pet' +  petType (item.dna) + '.jpg)'}">
+                        <div class="img-view" :style="{backgroundImage: 'url(' + petType (item.dna)  + ')'}">
                             <div class="level-view">
                                 <div class="level">{{ item.level }}</div>
                                 <div class="text">LVL</div>
@@ -58,7 +58,8 @@ export default {
     mounted() {},
     methods: {
         petType(dna) {
-            return token.getPetType(dna);
+            let type = token.getPetType(dna);
+            return require('../../assets/imgs/pet' + type + '.jpg');
         },
         feed(id) {
             this.$prompt('请输入留言', '宠物喂食', {

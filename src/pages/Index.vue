@@ -10,7 +10,7 @@
         <div :class="['capture', userInfo.readyTime * 1000 >= new Date().getTime() ? 'lengque' : '']">
             <div class="tip" v-if="userInfo.readyTime * 1000 >= new Date().getTime()">捕获技能冷却中....</div>
             <div class="tip" v-else>可捕获一只新宠物</div>
-            <img src="../../static/imgs/pet1.jpg" alt="" class="img" />
+            <img src="../assets/imgs/pet1.jpg" alt="" class="img" />
             <div class="mask"></div>
             <div class="captureBtn" @click="captrue" v-if="userInfo.readyTime * 1000 < new Date()"><i class="iconfont icon-zhuaqu"></i></div>
             <div class="captureBtnNO"  v-if="userInfo.readyTime * 1000 >= new Date().getTime()">
@@ -23,7 +23,7 @@
             <div>总数：{{pets.length}}</div>
         </div>
         <Pets :data="pets"></Pets>
-        
+
         <div class="noMore">没有更多宠物了~</div>
     </div>
 </template>

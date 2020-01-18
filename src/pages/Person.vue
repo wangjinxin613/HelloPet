@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
         <div class="userInfo">
-            <div class="headImg"><img src="../../static/imgs/headImg.svg" alt="" /></div>
+            <div class="headImg"><img src="../assets/imgs/headImg.svg" alt="" /></div>
             <div class="nick">
                 {{userInfo.name}}
             </div>

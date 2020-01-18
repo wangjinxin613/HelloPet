@@ -11,29 +11,29 @@ class Token {
         // 只能合约地址
         let myContractAddress = "0xFeAE69049D5A7fE9aF32A0AAD6e8cb77f99Aac0D";
 
-        window.onload = () => {
-            if (typeof web3 === 'undefined') {
-                if (main.$route.path.indexOf('/error') == -1) {
-                    main.$router.push({
-                        path: '/error/请先安装MetaMask浏览器插件'
-                    })
-                }
-                setInterval(() => {
-                    if (typeof web3 === 'undefined') {
-                        if (main.$route.path.indexOf('/error') == -1)
-                            main.$router.push({
-                                path: '/error/请先安装MetaMask浏览器插件'
-                            })
-                        return;
-                    }
-                }, 100)
-                return;
+        if (typeof web3 === 'undefined') {
+            if (main.$route.path.indexOf('/error') == -1) {
+                main.$router.push({
+                    path: '/error/请先安装MetaMask浏览器插件'
+                })
             }
-            var web3js = new Web3(web3.currentProvider);
-            this.web3js = web3js;
-            var myContract = new web3js.eth.Contract(myABI, myContractAddress);
-            this.myContract = myContract;
+            setInterval(() => {
+                if (typeof web3 === 'undefined') {
+                    if (main.$route.path.indexOf('/error') == -1)
+                        main.$router.push({
+                            path: '/error/请先安装MetaMask浏览器插件'
+                        })
+                    return;
+                }
+            }, 100)
+            return;
+        }
+        var web3js = new Web3(web3.currentProvider);
+        this.web3js = web3js;
+        var myContract = new web3js.eth.Contract(myABI, myContractAddress);
+        this.myContract = myContract;
 
+        window.onload = () => {
             setInterval(() => {
                 this.login(); //自动登录
             }, 500)

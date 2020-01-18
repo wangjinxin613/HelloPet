@@ -2,7 +2,7 @@
     <div v-loading="loading">
         <div class="pets wrap" v-if="!noThisPet">
             <div class="pet-detail">
-                <div class="img-view" :style="{ backgroundImage: 'url(../static/imgs/pet' + petType(item.dna) + '.jpg)' }">
+                <div class="img-view" :style="{ backgroundImage: 'url(' + petType(item.dna) + ')' }">
                     <div class="level-view">
                         <div class="level">{{ item.level }}</div>
                         <div class="text">LVL</div>
@@ -126,7 +126,9 @@ export default {
     },
     methods: {
         petType(dna) {
-            return token.getPetType(dna);
+            let type = token.getPetType(dna);
+            if(typeof type != 'undefined')
+            return require('../assets/imgs/pet' + type + '.jpg');
         },
         async loadData() {
             try {
