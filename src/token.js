@@ -2,54 +2,83 @@ import myABI from './assets/cryptozombies_abi.json';
 var Web3 = require('web3');
 import store from './vuex/store.js'
 import Vue from 'vue';
-import main from './main.js';
+import main from '@/main.js';
+import config from './config.js';
 
 class Token {
 
     //初始化
     constructor() {
-        // 只能合约地址
-        let myContractAddress = "0xFeAE69049D5A7fE9aF32A0AAD6e8cb77f99Aac0D";
 
+
+        window.onload = () => {
+            // console.log(ethereum.networkVersion);
+            // // 只能合约地址
+            // let myContractAddress = config.contractAddress;
+
+            // if (typeof web3 === 'undefined') {
+            //     if (main.$route.path.indexOf('/error') == -1) {
+            //         main.$router.push({
+            //             path: '/error/请先安装MetaMask浏览器插件'
+            //         })
+            //     }
+            //     setInterval(() => {
+            //         if (typeof web3 === 'undefined') {
+            //             if (main.$route.path.indexOf('/error') == -1)
+            //                 main.$router.push({
+            //                     path: '/error/请先安装MetaMask浏览器插件'
+            //                 })
+            //             return;
+            //         }
+            //     }, 100)
+            //     return;
+            // }
+            // var web3js = new Web3(web3.currentProvider);
+            // this.web3js = web3js;
+            // var myContract = new web3js.eth.Contract(myABI, myContractAddress);
+            // this.myContract = myContract;
+
+            // setInterval(() => {
+            //     this.login(); //自动登录
+            // }, 500)
+           setInterval(() => {
+               this.init();
+           }, 500)
+        }
+    }
+
+    init() {
         if (typeof web3 === 'undefined') {
-            if (main.$route.path.indexOf('/error') == -1) {
+            if (main.$route.path.indexOf('/error') == -1)
                 main.$router.push({
                     path: '/error/请先安装MetaMask浏览器插件'
                 })
-            }
-            setInterval(() => {
-                if (typeof web3 === 'undefined') {
-                    if (main.$route.path.indexOf('/error') == -1)
-                        main.$router.push({
-                            path: '/error/请先安装MetaMask浏览器插件'
-                        })
-                    return;
-                }
-            }, 100)
             return;
         }
+        var networkVersion = ethereum.networkVersion; //网络类型
+        var have = false;
+        Object.keys(config.net).forEach((key, value) => {
+            if (key == networkVersion) {
+                have = true;
+            }
+        })
+        if (!have) { // 不支持的网络类型
+            main.$router.push({
+                path: '/error/不支持的网络类型'
+            })
+            return;
+        }
+        let myContractAddress = config.net[networkVersion].contractAddress;
         var web3js = new Web3(web3.currentProvider);
         this.web3js = web3js;
         var myContract = new web3js.eth.Contract(myABI, myContractAddress);
         this.myContract = myContract;
-
-        window.onload = () => {
-            setInterval(() => {
-                this.login(); //自动登录
-            }, 500)
-        }
+        this.login();
     }
 
     // metamask 授权
     async login() {
         if (window.ethereum) {
-            if (ethereum.networkVersion != 1) {
-                if (main.$route.path.indexOf('/error') == -1)
-                    main.$router.push({
-                        path: '/error/请接入区块链主网络'
-                    })
-                return;
-            }
             window.web3 = new Web3(ethereum);
             try {
                 // Request account access if needed
