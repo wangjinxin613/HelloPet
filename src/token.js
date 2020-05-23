@@ -4,6 +4,7 @@ import store from './vuex/store.js'
 import Vue from 'vue';
 import main from '@/main.js';
 import config from './config.js';
+import petJson from './pet.js';
 
 class Token {
 
@@ -365,8 +366,10 @@ class Token {
 
     // 根据dna计算出宠物的类型
     getPetType(dna) {
-        if (typeof dna != 'undefined' && dna != "")
-            return parseInt(dna.substring(0, 4)) % 20 + 1; // 1~20个数代表20中不同的宠物
+        if (typeof dna != 'undefined' && dna != "") {
+            var index = parseInt(dna.substring(0, 4)) % petJson.pets.length;
+            return petJson.pets[index];
+        }
     }
 
     // 修改用户名

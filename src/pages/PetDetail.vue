@@ -2,10 +2,10 @@
     <div v-loading="loading">
         <div class="pets wrap" v-if="!noThisPet">
             <div class="pet-detail">
-                <div class="img-view" :style="{ backgroundImage: 'url(' + petType(item.dna) + ')' }">
+                <div class="img-view" :style="{ backgroundImage: 'url(' + petType(item) + ')' }">
                     <div class="level-view">
                         <div class="level">{{ item.level }}</div>
-                        <div class="text">LVL</div>
+                        <div class="text">{{item.petName}}</div>
                     </div>
                     <el-tooltip class="item" effect="dark" content="喂食后宠物可以随机升1到5级,20级以后的宠物喂食后有30%的几率诞生一只新宠物~" placement="bottom">
                         <div class="feed-view" @click.stop="feed(item.id)" v-if="item.readyTime * 1000 < new Date().getTime()"><i class="iconfont icon-huluobu"></i></div>
@@ -27,6 +27,7 @@
                         <div class="text">{{ item.name }}</div>
                     </div>
                     <div class="createTime" style="margin-top: 20px;">DNA：{{ item.dna }}</div>
+                    <div class="createTime" style="margin-top: 20px;">宠物种类：{{ item.petName }}</div>
                     <div class="createTime">等级：{{ item.level }} 级</div>
                     <div class="createTime">出生日期：{{ item.createTime | timeToString }}</div>
                     <div class="createTime">喂食次数：{{ item.feedCount }} 次</div>
@@ -125,10 +126,8 @@ export default {
         clearInterval(this.interval1); // 销毁interval，避免一直执行
     },
     methods: {
-        petType(dna) {
-            let type = token.getPetType(dna);
-            if(typeof type != 'undefined')
-            return require('../assets/imgs/pet' + type + '.jpg');
+        petType(item) {
+            return require('../assets/image/' + item.type + '/' + item.path);
         },
         async loadData() {
             try {
@@ -136,7 +135,14 @@ export default {
                 this.petId = id;
                 this.ownerAddress = await token.petToOwner(id);
                 var result = await token.getPetDetail(id);
+                let type = token.getPetType(result.dna);
+                Object.assign(result, {
+                    path: type.path,
+                    type: type.type,
+                    petName: type.name
+                })
                 this.item = result;
+
                 var feeds = await token.getFeeds(id);
                 this.feeds = feeds;
                 this.updateCountDown();

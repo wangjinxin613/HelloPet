@@ -4,10 +4,10 @@
             <el-row :gutter="20" align="middle">
                 <el-col :xs="6" :sm="6" :md="6" v-for="(item, index) in data" :key="index">
                     <div class="pet-detail" @click="$router.push({ path: '/petDetail?id=' + item.id })">
-                        <div class="img-view" :style="{backgroundImage: 'url(' + petType (item.dna)  + ')'}">
+                        <div class="img-view" :style="{backgroundImage: 'url(' + petType (item)  + ')'}">
                             <div class="level-view">
                                 <div class="level">{{ item.level }}</div>
-                                <div class="text">LVL</div>
+                                <div class="text">{{item.petName}}</div>
                             </div>
                             <el-tooltip class="item" effect="dark" content="喂食后宠物可以随机升1到5级,20级以后的宠物喂食后有30%的几率诞生一只新宠物" placement="bottom">
                                 <div class="feed-view" @click.stop="feed(item.id)" v-if="item.readyTime * 1000 < new Date().getTime()"><i class="iconfont icon-huluobu"></i></div>
@@ -55,11 +55,22 @@ export default {
             return new Date(timeStamp * 1000).Format('yyyy-MM-dd HH:mm');
         }
     },
+    watch: {
+       data() {
+           for(let i in this.data) {
+               let petJson = token.getPetType(this.data[i].dna);
+               Object.assign(this.data[i], {
+                   path: petJson.path,
+                   type: petJson.type,
+                   petName: petJson.name
+               });
+           }
+       }
+    },
     mounted() {},
     methods: {
-        petType(dna) {
-            let type = token.getPetType(dna);
-            return require('../../assets/imgs/pet' + type + '.jpg');
+        petType(item) {
+            return require('../../assets/image/' + item.type + '/' + item.path);
         },
         feed(id) {
             this.$prompt('请输入留言', '宠物喂食', {
