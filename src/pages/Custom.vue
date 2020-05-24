@@ -15,7 +15,7 @@
                 </el-option>
               </el-select>
             <el-input v-model="petName" placeholder="输入您想定制的宠物名称" style="width: 300px;margin-left: 20px;" @input="changPetName"></el-input>
-            <el-button type="primary" style="margin-left: 20px;">搜 &nbsp; 索</el-button>
+            <el-button type="primary" @click="search" style="margin-left: 20px;">搜 &nbsp; 索</el-button>
         </div>
 
         <div class="pets">
@@ -58,7 +58,7 @@ export default {
             let price = await token.getPrice();
             this.price = price / Math.pow(10, 18) + 'ETH';
         }
-        this.pets = Object.assign({}, petJson.pets);
+        this.pets = this.deepCopy(petJson.pets);
         var petType = [];
         for(let i in petJson.types) {
             petType.push({
@@ -69,6 +69,19 @@ export default {
         this.petTypes = petType;
     },
     methods: {
+        deepCopy(obj) {
+        	var result = Array.isArray(obj) ? [] : {};
+        	for (var key in obj) {
+        		if (obj.hasOwnProperty(key)) {
+        			if (typeof obj[key] === 'object' && obj[key] !== null) {
+        				result[key] = this.deepCopy(obj[key]); //递归复制
+        			} else {
+        				result[key] = obj[key];
+        			}
+        		}
+        	}
+        	return result;
+        },
         img(type) {
             return require('../assets/image/' + type);
         },
@@ -128,7 +141,7 @@ export default {
         },
         petTypeChange(type) {
             var result = [];
-            var pets = Object.assign({}, petJson.pets);
+            var pets = this.deepCopy(petJson.pets);
             for(let i in pets) {
                 if(pets[i].type == type) {
                     result.push(pets[i]);
@@ -138,13 +151,16 @@ export default {
         },
         changPetName(name) {
             var result = [];
-            var pets = Object.assign({}, petJson.pets);
+            var pets = this.deepCopy(petJson.pets);
             for(let i in pets) {
                 if(pets[i].name.indexOf(name) != -1) {
                     result.push(pets[i]);
                 }
             }
             this.pets = result;
+        },
+        search() {
+            
         }
     }
 };
